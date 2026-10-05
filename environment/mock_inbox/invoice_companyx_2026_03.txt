@@ -1,0 +1,19 @@
+From: billing@companyx.com
+To: accounts@ourcompany.com
+Subject: Invoice #CX-2026-0301
+Date: 2026-03-01
+
+Dear Accounts Team,
+
+Please find below the invoice details for services rendered in February 2026.
+
+Invoice Number: CX-2026-0301
+Vendor: Company X Pvt. Ltd.
+Amount Due: INR 84,500.00
+Due Date: 2026-03-20
+Payment Terms: Net 20
+
+Please process payment by the due date to avoid late fees.
+
+Regards,
+Company X Billing Team

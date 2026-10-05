@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Task Worker — Live Demo</title>
+<style>
+  body { font-family: -apple-system, system-ui, sans-serif; max-width: 760px; margin: 40px auto; padding: 0 16px; color: #1a1a1a; }
+  h1 { font-size: 1.4rem; }
+  p.sub { color: #555; margin-top: -8px; }
+  textarea { width: 100%; min-height: 70px; font-size: 1rem; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; }
+  button { margin-top: 10px; padding: 10px 18px; font-size: 1rem; border: none; border-radius: 6px; background: #1a1a1a; color: white; cursor: pointer; }
+  button:disabled { opacity: 0.5; cursor: default; }
+  .example { font-size: 0.85rem; color: #666; margin-top: 4px; cursor: pointer; text-decoration: underline; }
+  #result { margin-top: 24px; white-space: pre-wrap; background: #f6f6f6; padding: 14px; border-radius: 6px; font-family: ui-monospace, monospace; font-size: 0.85rem; max-height: 500px; overflow-y: auto; }
+  .summary-box { margin-top: 20px; padding: 14px; background: #eef7ee; border-left: 4px solid #2e7d32; border-radius: 4px; }
+</style>
+</head>
+<body>
+  <h1>Autonomous AI Task Worker — Live Demo</h1>
+  <p class="sub">Give it a task. It searches a mock inbox, extracts data, enters it into a mock internal system, and verifies the result — deciding every step itself.</p>
+
+  <textarea id="task">Find the latest invoice from Company X, extract the amount and due date, enter it into our internal system, and tell me once it is done.</textarea>
+  <div class="example" onclick="document.getElementById('task').value='Find the invoice from Company Y and enter it into our internal system.'">Try a different example (Company Y) →</div>
+  <br>
+  <button id="runBtn" onclick="runTask()">Run Agent</button>
+
+  <div id="summaryBox"></div>
+  <div id="result"></div>
+
+<script>
+async function runTask() {
+  const btn = document.getElementById('runBtn');
+  const task = document.getElementById('task').value.trim();
+  const resultEl = document.getElementById('result');
+  const summaryEl = document.getElementById('summaryBox');
+  if (!task) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Running… (can take ~20-40s)';
+  resultEl.textContent = '';
+  summaryEl.innerHTML = '';
+
+  try {
+    const res = await fetch('/api/run-task', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ task })
+    });
+    const data = await res.json();
+
+    if (data.error) {
+      resultEl.textContent = 'Error: ' + data.error;
+    } else {
+      summaryEl.innerHTML = `<div class="summary-box"><b>Summary:</b> ${data.summary}<br><b>Evidence:</b> ${data.evidence}</div>`;
+      resultEl.textContent = JSON.stringify(data.trace, null, 2);
+    }
+  } catch (e) {
+    resultEl.textContent = 'Request failed: ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Run Agent';
+  }
+}
+</script>
+</body>
+</html>

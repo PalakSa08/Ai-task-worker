@@ -1,0 +1,12 @@
+{
+  "invoices": [
+    {
+      "id": "REC-56039",
+      "vendor": "Company X Pvt. Ltd.",
+      "amount": "INR 84,500.00",
+      "due_date": "2026-03-20",
+      "invoice_number": "CX-2026-0301",
+      "entered_at": "2026-10-05 08:40:56"
+    }
+  ]
+}

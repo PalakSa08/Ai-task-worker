@@ -1,0 +1,16 @@
+From: accounts@companyy.in
+To: accounts@ourcompany.com
+Subject: Invoice INV-9981
+Date: 2026-02-14
+
+Hello,
+
+Attached is our invoice for the February order.
+
+Invoice Number: INV-9981
+Vendor: Company Y Industries
+Amount Due: INR 1,12,900.00
+Due Date: 2026-03-05
+
+Thanks,
+Company Y Accounts

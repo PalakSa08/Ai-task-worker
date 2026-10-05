@@ -1,0 +1,17 @@
+From: billing@companyx.com
+To: accounts@ourcompany.com
+Subject: Invoice #CX-2026-0105
+Date: 2026-01-05
+
+Dear Accounts Team,
+
+Please find below the invoice details for services rendered in December 2025.
+
+Invoice Number: CX-2026-0105
+Vendor: Company X Pvt. Ltd.
+Amount Due: INR 72,300.00
+Due Date: 2026-01-25
+Payment Terms: Net 20
+
+Regards,
+Company X Billing Team
