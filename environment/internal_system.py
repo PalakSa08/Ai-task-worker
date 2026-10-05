@@ -13,7 +13,11 @@ import time
 import random
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent / "internal_system_data.json"
+# Vercel's project folder is read-only; only /tmp is writable there.
+if os.environ.get("VERCEL"):
+    DB_PATH = Path("/tmp/internal_system_data.json")
+else:
+    DB_PATH = Path(__file__).parent / "internal_system_data.json"
 
 
 def _load():
@@ -24,6 +28,7 @@ def _load():
 
 
 def _save(data):
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(DB_PATH, "w") as f:
         json.dump(data, f, indent=2)
 
